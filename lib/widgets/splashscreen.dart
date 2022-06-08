@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:project/main.dart';
 import 'input.dart';
 
 class Splashscreen extends StatefulWidget{
@@ -18,12 +19,13 @@ class _Splashscreen extends State<Splashscreen>{
     splashscreenStart();
   }
 
+
   splashscreenStart() async{
     var duration = const Duration(seconds: 5);
     return Timer(duration, (){
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Input()),
+        MaterialPageRoute(builder: (context) => const MyApp()),
       );
     });
   }
@@ -31,32 +33,34 @@ class _Splashscreen extends State<Splashscreen>{
   @override 
   Widget build(BuildContext context){
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-
-            Image.asset(
-              'images/icon.png',
-              width: 175.0,
-              height: 175.0,
-              fit: BoxFit.cover
-            ), 
-
-            const SizedBox(height: 24.0,),
-
-            const Text(
-              "CheckBarang",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 30.0,
+    return MaterialApp(
+      home:  Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+    
+              Image.network(
+                'https://png.pngtree.com/png-vector/20190115/ourlarge/pngtree-vector-shop-icon-png-image_319729.jpg',
+                width: 175.0,
+                height: 175.0,
+                fit: BoxFit.cover
+              ), 
+    
+              const SizedBox(height: 24.0,),
+    
+              const Text(
+                "CheckBarang",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.0,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
