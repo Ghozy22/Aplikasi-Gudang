@@ -39,12 +39,12 @@ class _Splashscreen extends State<Splashscreen>{
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
 
-            Image.asset(
-              'images/icon.png',
+            Image.network(
+              "https://img2.pngdownload.id/20180207/qve/kisspng-warehouse-factory-people-vector-material-warehouse-5a7b0485e86ea9.1612533215180115259521.jpg",
               width: 175.0,
               height: 175.0,
-              fit: BoxFit.cover
-            ), 
+              fit: BoxFit.cover,
+            ),  
 
             const SizedBox(height: 24.0,),
 
