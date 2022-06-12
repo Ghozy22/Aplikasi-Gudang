@@ -1,15 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:project/api/api_sheets_barang.dart';
 import 'package:project/pages/create.dart';
+import 'package:project/widgets/splashscreen.dart';
 
 
 Future main() async {
-  
-  WidgetsFlutterBinding.ensureInitialized();
 
-  await sheetsBarang.init();
 
-  runApp(MyApp());
+  int a = 1;
+
+  if(a == 1){
+    runApp(const Splashscreen());
+    a = 2;
+    if(a == 2){
+      WidgetsFlutterBinding.ensureInitialized();
+
+      await sheetsBarang.init();
+      runApp( const MyApp());
+    }
+    null;
+  }
+  a = 4;
+
 }
 
 class MyApp extends StatelessWidget {

@@ -3,19 +3,19 @@ import 'package:project/models/data.dart';
 import 'package:project/widgets/button.dart';
 
 class FormWidget extends StatefulWidget {
-  const FormWidget({ Key? key, required this.onSavedData }) : super(key: key);
+  const FormWidget({ Key? key, this.data , required this.onSavedData }) : super(key: key);
+
+  final barang? data;
 
 
   final ValueChanged<barang> onSavedData;
-
-
 
   @override
   State<FormWidget> createState() => _FormWidgetState();
 }
 
 class _FormWidgetState extends State<FormWidget> {
-
+  
   late TextEditingController controllerSN;
   final formkey = GlobalKey<FormState>();
 
@@ -27,8 +27,21 @@ class _FormWidgetState extends State<FormWidget> {
     initData();
   }
 
+  @override
+  void didUpdateWidget(covariant FormWidget oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+
+    initData();
+  }
+
   void initData(){
-    controllerSN = TextEditingController();
+
+    final sn = widget.data == null ? '' : widget.data!.sn;
+
+    setState(() {
+      controllerSN = TextEditingController(text: sn);
+    });
   }
 
 
@@ -58,6 +71,7 @@ class _FormWidgetState extends State<FormWidget> {
     validator: (value) =>
     value != null && value.isEmpty ? 'Enter SN' : null , 
   );
+
 
   Widget submit() => Button(text: 'Save', onClicked: (){
     final form = formkey.currentState!;
