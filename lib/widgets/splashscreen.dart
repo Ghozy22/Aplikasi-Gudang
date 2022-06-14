@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:project/main.dart';
 import 'input.dart';
 
 class Splashscreen extends StatefulWidget{
@@ -18,12 +19,13 @@ class _Splashscreen extends State<Splashscreen>{
     splashscreenStart();
   }
 
+
   splashscreenStart() async{
     var duration = const Duration(seconds: 5);
     return Timer(duration, (){
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const Input()),
+        MaterialPageRoute(builder: (context) => const MyApp()),
       );
     });
   }
@@ -54,9 +56,10 @@ class _Splashscreen extends State<Splashscreen>{
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
                 fontSize: 30.0,
+
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

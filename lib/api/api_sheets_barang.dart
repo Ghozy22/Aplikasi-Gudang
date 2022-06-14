@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:project/models/data.dart';
 
@@ -46,12 +47,44 @@ class sheetsBarang{
       return spreadsheet.worksheetByTitle(title)!;
     }
   }
+  
+  static Future<int> getRowCount() async {
+      if(_dataSheet == null) return 0; 
+      
+      final lastRow = await _dataSheet!.values.lastRow();
+
+      return lastRow == null ? 0 : int.tryParse(lastRow.first) ?? 0;
+
+  }
+
+    static Future <List<barang>> getAll() async {
+    
+    if(_dataSheet == null) return <barang>[];
+
+    final datas = await _dataSheet!.values.map.allRows();
+
+    return datas == null ? <barang>[] : datas.map(barang.fromJson).toList();
+  
+
+  }
+
+  static Future <barang?> getById(int id) async {
+    
+    if(_dataSheet == null) return null;
+
+    final json = await _dataSheet!.values.map.rowByKey(id, fromColumn: 1);
+
+    return json == null ? null : barang.fromJson(json);
+  }
+
 
   static Future insert(List<Map<String, dynamic>> rowList) async {
     
     if(_dataSheet == null) return;
 
     _dataSheet!.values.map.appendRows(rowList);
+
   }
+
 
 }
