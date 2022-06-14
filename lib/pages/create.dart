@@ -16,6 +16,8 @@ class create extends StatefulWidget {
 
 class _createState extends State<create> {
 
+  TextEditingController scan = TextEditingController();
+
   List<barang> datas = [];
 
   @override
@@ -55,6 +57,19 @@ class _createState extends State<create> {
         padding: EdgeInsets.all(32),
         child: Column(
           children: [
+
+            TextField(
+                controller: scan,
+                decoration: InputDecoration(
+                labelText: 'Serial Number Scan',
+                border: OutlineInputBorder(
+
+                )
+              ) 
+            ),
+            
+            SizedBox(height: 20,),
+
             FormWidget( 
               
               //data: coba(),
@@ -69,23 +84,37 @@ class _createState extends State<create> {
               final newData = data.copy(id : id);
 
               await sheetsBarang.insert([newData.toJson()]);
+
+              
             },
             ),
             SizedBox(height: 20,),
 
-            Column(
-            children: List.generate(datas.length, (index) {
-              return Text(
-                datas[index].sn.toString(),
-                style: const TextStyle(fontSize: 22),
-                
-              );
-            }),
-          ),
+            Button(text: "Hapus", onClicked: deleteData),
+
+            SizedBox(height: 20,),
+
+            SingleChildScrollView(
+              child: Column(
+              children: List.generate(datas.length, (index) {
+                return Text(
+                  datas[index].sn.toString(),
+                  style: const TextStyle(fontSize: 22),
+                  
+                );
+              }),
+                      ),
+            ),
             
           ],
         ),
       ),
     );
   }
+  Future deleteData() async {
+    sheetsBarang.deleteData(scan.text);
+  }
+
 }
+
+
