@@ -87,4 +87,17 @@ class sheetsBarang{
   }
 
 
+  static Future<bool> deleteData(String sn) async {
+    
+    if(_dataSheet == null) return false;
+
+    final index = await _dataSheet!.values.rowIndexOf(sn);
+    if(index == -1) return false;
+
+    
+
+    return _dataSheet!.deleteRow(index);
+
+  }
+
 }
