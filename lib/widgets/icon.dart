@@ -24,12 +24,12 @@ class _State extends State<Icon> {
                   color: Colors.black,
                   shape: CircleBorder(),
                   ),
-                  child: IconButton(
-                    icon: const Icon(Icons.camera_alt_rounded),
-                    color: Colors.white70,
-                    iconSize: 30.0,
-                    onPressed: () {},
-                  )
+                  //child: IconButton(
+                  //  icon: const Icon(Icons.camera_alt_rounded),
+                   // color: Colors.white70,
+                   // iconSize: 30.0,
+                  //  onPressed: () {},
+                 // )
                 ),
 
                 RaisedButton(  
@@ -42,8 +42,8 @@ class _State extends State<Icon> {
                         width: 10,
                       ),
                       Icon( 
-                        Icons.camera_alt_rounded,
-                        size: 30.0,
+                        //Icons.camera_alt_rounded,
+                      //  size: 30.0,
                       ),
                     ],
                   ),

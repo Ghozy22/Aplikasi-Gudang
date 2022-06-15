@@ -33,30 +33,31 @@ class _Splashscreen extends State<Splashscreen>{
   @override 
   Widget build(BuildContext context){
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-
-            Image.network(
-              "https://img2.pngdownload.id/20180207/qve/kisspng-warehouse-factory-people-vector-material-warehouse-5a7b0485e86ea9.1612533215180115259521.jpg",
-              width: 175.0,
-              height: 175.0,
-              fit: BoxFit.cover,
-            ),  
-
-            const SizedBox(height: 24.0,),
-
-            const Text(
-              "CheckBarang",
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 30.0,
-
+    return MaterialApp(
+      home:  Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+    
+              Image.network(
+                'https://png.pngtree.com/png-vector/20190115/ourlarge/pngtree-vector-shop-icon-png-image_319729.jpg',
+                width: 175.0,
+                height: 175.0,
+                fit: BoxFit.cover
+              ), 
+    
+              const SizedBox(height: 24.0,),
+    
+              const Text(
+                "CheckBarang",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 30.0,
+                ),
               ),
             ],
           ),
