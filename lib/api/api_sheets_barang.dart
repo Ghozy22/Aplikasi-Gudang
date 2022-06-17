@@ -57,6 +57,8 @@ class sheetsBarang{
 
   }
 
+  
+
     static Future <List<barang>> getAll() async {
     
     if(_dataSheet == null) return <barang>[];

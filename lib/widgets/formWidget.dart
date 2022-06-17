@@ -69,11 +69,11 @@ class _FormWidgetState extends State<FormWidget> {
       )
     ),
     validator: (value) =>
-    value != null && value.isEmpty ? 'Enter SN' : null , 
+    value != null && value.isEmpty ? 'Masukan Serial Number!' : null , 
   );
 
 
-  Widget submit() => Button(text: 'Save', onClicked: (){
+  Widget submit() => Button(text: 'Store', onClicked: (){
     final form = formkey.currentState!;
     final isValid = form.validate();
 

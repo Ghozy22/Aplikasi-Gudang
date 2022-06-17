@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:project/main.dart';
+import 'package:project/pages/create.dart';
 import 'input.dart';
 
 class Splashscreen extends StatefulWidget{
@@ -21,11 +22,11 @@ class _Splashscreen extends State<Splashscreen>{
 
 
   splashscreenStart() async{
-    var duration = const Duration(seconds: 5);
+    var duration = const Duration(seconds: 3);
     return Timer(duration, (){
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => const MyApp()),
+        MaterialPageRoute(builder: (context) => const create()),
       );
     });
   }
@@ -43,25 +44,25 @@ class _Splashscreen extends State<Splashscreen>{
             children: <Widget>[
     
               Image.network(
-                'https://png.pngtree.com/png-vector/20190115/ourlarge/pngtree-vector-shop-icon-png-image_319729.jpg',
-                width: 175.0,
-                height: 175.0,
+                'https://img.freepik.com/free-vector/online-order-delivery-service-shipment-internet-shop-basket-cardboard-boxes-buyer-with-laptop-delivery-note-monitor-screen-parcel-vector-isolated-concept-metaphor-illustration_335657-2838.jpg?w=2000',
+                width: 525.0,
+                height: 525.0,
                 fit: BoxFit.cover
               ), 
-    
-              const SizedBox(height: 24.0,),
-    
               const Text(
-                "CheckBarang",
+                "Tunggu Sebentar yaa...",
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Color.fromARGB(255, 77, 74, 74),
                   fontWeight: FontWeight.bold,
-                  fontSize: 30.0,
+                  fontSize: 22.0,
                 ),
               ),
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(backgroundColor: Color.fromARGB(255, 114, 40, 231), child: Icon(Icons.forward) ,onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const create(),));
+        }),
       ),
     );
   }

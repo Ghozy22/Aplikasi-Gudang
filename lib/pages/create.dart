@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:gsheets/gsheets.dart';
 import 'package:project/api/api_sheets_barang.dart';
@@ -5,6 +7,11 @@ import 'package:project/main.dart';
 import 'package:project/models/data.dart';
 import 'package:project/widgets/button.dart';
 import 'package:project/widgets/formWidget.dart';
+import 'package:project/widgets/splashscreen.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+import 'dart:html' as html;
+
 
 
 class create extends StatefulWidget {
@@ -20,19 +27,22 @@ class _createState extends State<create> {
 
   List<barang> datas = [];
 
+  
+
   @override
   void didUpdateWidget(covariant create oldWidget) {
     // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
 
     setState(() {
-      
+      getDatas();
+      mounted;
     });
   }
 
   void initState(){
     super.initState();
-
+    datas.length;
     getDatas();
   }
 
@@ -44,6 +54,8 @@ class _createState extends State<create> {
     });
 
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -58,14 +70,32 @@ class _createState extends State<create> {
         child: Column(
           children: [
 
-            TextField(
-                controller: scan,
-                decoration: InputDecoration(
-                labelText: 'Serial Number Scan',
-                border: OutlineInputBorder(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 320,
+                  child: TextField(
+                      controller: scan,
+                      decoration: InputDecoration(
+                      labelText: 'Inputkan Id',
+                      border: OutlineInputBorder(
 
-                )
-              ) 
+                      )
+                    ),
+                  
+                  ),
+                ),
+
+              SizedBox(
+                width: 20,
+              ),
+
+              Button(text: "Hapus" , onClicked: (){
+              deleteData();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Splashscreen()));
+            }),
+              ],
             ),
             
             SizedBox(height: 20,),
@@ -81,38 +111,67 @@ class _createState extends State<create> {
 
               final id = await sheetsBarang.getRowCount() + 1;
 
-              final newData = data.copy(id : id);
 
-              await sheetsBarang.insert([newData.toJson()]);
+              final newData = data.copy(id : id);
+              final j = await sheetsBarang.insert([newData.toJson()]);
+
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Splashscreen()));
 
               
             },
             ),
             SizedBox(height: 20,),
 
-            Button(text: "Hapus", onClicked: deleteData),
+            Expanded(
+              child: ListView.builder(shrinkWrap: true,itemBuilder: (BuildContext context, int index) {
+            
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    
 
-            SizedBox(height: 20,),
+                    decoration: BoxDecoration(
+                       borderRadius: BorderRadius.circular(10),
+                    color: Color.fromARGB(255, 226, 222, 222),
+                       
+                    ),
 
-            SingleChildScrollView(
-              child: Column(
-              children: List.generate(datas.length, (index) {
-                return Text(
-                  datas[index].sn.toString(),
-                  style: const TextStyle(fontSize: 22),
-                  
+                    child: ListTile(
+                      title: Text("Serial Number : "+datas[index].sn.toString()),
+                      subtitle: Text("Id : "+datas[index].id.toString()),
+                      trailing: GestureDetector(child: Icon(Icons.delete), onTap: (){
+                        hapusList(datas[index].id.toString());
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Splashscreen()));
+                      },),
+                    ),
+                  ),
                 );
-              }),
+              },
+              itemCount: datas.length,
               ),
             ),
             
           ],
         ),
       ),
+
+      floatingActionButton: FloatingActionButton(hoverColor: Color.fromARGB(255, 177, 8, 149),
+       backgroundColor: Color.fromARGB(255, 147, 73, 231),
+      onPressed: () {
+        html.window.open("https://docs.google.com/spreadsheets/d/1_cmMBI7ZrkHNeHyf5SEr6mblGdwHH_ZHwmcorPdXwUQ/edit?pli=1#gid=0", "_blank");
+      } , child: Icon(Icons.file_open)),
+      
     );
   }
   Future deleteData() async {
+    
     sheetsBarang.deleteData(scan.text);
+  }
+
+
+    Future hapusList(String id) async {
+    
+    sheetsBarang.deleteData(id);
   }
 
 }
